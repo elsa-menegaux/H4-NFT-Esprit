@@ -16,7 +16,7 @@ async function getProviderSignerContract() {
   const provider = new ethers.BrowserProvider(window.ethereum);
   const network = await provider.getNetwork();
 
-  if (network.chainId !== 11155111) {
+  if (network.chainId !== BigInt(chainId)) {
     throw new Error("Mauvais réseau");
   }
 
@@ -67,17 +67,5 @@ if (mintButton) {
   mintButton.addEventListener("click", (event) => {
     event.preventDefault();
     mintNFT();
-  });
-}
-
-// Optionnel : détecte changement de réseau et met à jour
-if (window.ethereum) {
-  window.ethereum.on("chainChanged", (chainHex) => {
-    const chainIdNum = Number(chainHex);
-    if (chainIdNum !== 11155111) {
-      setStatus("Mauvais réseau");
-    } else {
-      setStatus("Sepolia détecté");
-    }
   });
 }
