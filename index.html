@@ -8,7 +8,19 @@
   <body>
     <div class="overlay"></div>
     <h1>Esprit NFT Collection</h1>
-    <button id="mintButton">Minter mon NFT</button>
+    <div id="passwordGate">
+      <input
+        id="passwordInput"
+        type="password"
+        placeholder="Entrer le mot de passe donné par le créateur pour pouvoir mint"
+      />
+      <button id="unlockButton" class="actionButton">
+        Valider le mot de passe
+      </button>
+    </div>
+    <button id="mintButton" class="actionButton" style="display: none">
+      Minter mon NFT
+    </button>
     <p id="status"></p>
     <!-- Pour afficher l'état (succès/erreur) -->
   </body>

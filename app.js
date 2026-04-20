@@ -3,6 +3,10 @@ import { contractAddress, abi, chainId } from "./config.js";
 
 const statusEl = document.querySelector("#status");
 const mintButton = document.querySelector("#mintButton");
+const passwordGate = document.querySelector("#passwordGate");
+const passwordInput = document.querySelector("#passwordInput");
+const unlockButton = document.querySelector("#unlockButton");
+const correctPassword = "01234567890";
 
 function setStatus(message) {
   if (statusEl) statusEl.textContent = message;
@@ -61,6 +65,27 @@ async function mintNFT() {
     }
     console.error(err);
   }
+}
+
+if (unlockButton && passwordInput && passwordGate && mintButton) {
+  unlockButton.addEventListener("click", () => {
+    const password = passwordInput.value.trim();
+    if (password === correctPassword) {
+      passwordGate.style.display = "none";
+      mintButton.style.display = "inline-block";
+      setStatus("Mot de passe correct. Vous pouvez maintenant mint.");
+      passwordInput.value = "";
+    } else {
+      setStatus("Mot de passe incorrect.");
+    }
+  });
+
+  passwordInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      unlockButton.click();
+    }
+  });
 }
 
 if (mintButton) {
