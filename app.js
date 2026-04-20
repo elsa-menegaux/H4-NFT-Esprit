@@ -42,10 +42,12 @@ async function connectWallet() {
 
 async function mintNFT() {
   try {
-    setStatus("Transaction en cours");
+    setStatus("Connexion du wallet...");
 
     // Assure connexion et réseau
     await connectWallet();
+    setStatus("Processus en cours...");
+
     const { contract } = await getProviderSignerContract();
 
     // Appel fonction mint du contrat
